@@ -1,5 +1,9 @@
 # High-Impact Genome Editing Literature Tracker
 
+<p align="center">
+  <img src="docs/assets/Figure1.png" alt="AI-powered weekly literature intelligence pipeline" width="1200">
+</p>
+
 A production-oriented literature triage pipeline for **genome editing labs**.
 
 This project scans a curated **high-impact journal pool** plus a **watchlist of key corresponding / senior authors**, filters papers using a boolean gate, ranks the matched papers, and writes a **reader-friendly review card** into Notion.
