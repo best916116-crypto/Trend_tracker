@@ -1,12 +1,20 @@
-# High-Impact Genome Editing Literature Tracker
+# Trend Tracker
 
 <p align="center">
   <img src="docs/assets/Figure1.png" alt="AI-powered weekly literature intelligence pipeline" width="1200">
 </p>
 
-A production-oriented literature triage pipeline for **genome editing labs**.
+Trend Tracker is a configurable literature collection, triage, ranking, and AI-summarization engine. It is the engine behind [Papertrail](https://park-junjae.github.io/papertrail/), the public web reader for its curated outputs.
 
-This project scans a curated **high-impact journal pool** plus a **watchlist of key corresponding / senior authors**, filters papers using a boolean gate, ranks the matched papers, and writes a **reader-friendly review card** into Notion.
+The current public deployment is configured around the interests of a mitochondrial genome-editing laboratory. That is an example configuration rather than a fixed subject boundary: journal pools, watched authors, keyword gates, ranking rules, and reader language can be adapted for another research program.
+
+## View the public reader
+
+**[Open Papertrail](https://park-junjae.github.io/papertrail/)**
+
+Papertrail is the presentation layer. Trend Tracker performs collection and analysis; Papertrail turns the resulting weekly snapshots into a searchable, reader-friendly website.
+
+This project scans a curated **journal pool** plus a **watchlist of key corresponding / senior authors**, filters papers using a boolean gate, ranks the matched papers, and produces structured review cards for downstream publication.
 
 For every selected paper, the tracker produces:
 - a **5-line review** in Korean by default
@@ -167,106 +175,6 @@ This applies to:
 - page body section headings and explanations
 
 Structured metadata stays mostly stable / English-friendly so Notion filtering remains reliable.
-
----
-
-## Quick start
-
-### 1) Create the environment
-
-```bash
-sudo apt update
-sudo apt install -y python3 python3-venv python3-pip
-
-cd cns_mt_tracker_high_impact
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-cp .env.example .env
-```
-
-### 2) Fill `.env`
-
-Minimum required:
-
-```bash
-OPENAI_API_KEY=...
-NOTION_API_KEY=...
-NOTION_DATABASE_ID=...
-```
-
-Recommended defaults:
-
-```bash
-OPENAI_MODEL=gpt-5.4-mini
-READER_LANGUAGE=ko
-TIMEZONE=Asia/Seoul
-
-DAYS_BACK=7
-LLM_REVIEW_LIMIT=10
-MIN_GATED_PAPERS=5
-MAX_DAYS_BACK=35
-EXPAND_STEP_DAYS=7
-
-CROSSREF_ROWS_PER_JOURNAL=50
-CROSSREF_ROWS_PER_AUTHOR=10
-JOURNAL_PRESET=cns_high_impact
-ENABLE_PUBMED_ENRICHMENT=true
-
-CROSSREF_MAILTO=your_email@example.com
-NCBI_EMAIL=your_email@example.com
-NCBI_API_KEY=
-```
-
-### 3) Prepare Notion
-
-Share the **original Notion database** with your integration, then run:
-
-```bash
-python scripts/bootstrap_notion.py --apply
-```
-
-### 4) Weekly dry-run
-
-```bash
-./scripts/run_weekly.sh --dry-run
-```
-
-### 5) Weekly real run (writes to Notion)
-
-```bash
-./scripts/run_weekly.sh
-```
-
----
-
-## CLI examples
-
-### Weekly dry-run with explicit args
-
-```bash
-python scripts/run_daily.py \
-  --journal-preset cns_high_impact \
-  --days-back 7 \
-  --min-gated 5 \
-  --max-days-back 35 \
-  --expand-step-days 7 \
-  --llm-limit 10 \
-  --dry-run
-```
-
-### Skip PubMed enrichment
-
-```bash
-python scripts/run_daily.py --skip-pubmed --dry-run
-```
-
-### Run only flagship journals
-
-```bash
-python scripts/run_daily.py --journal-preset cns_main --dry-run
-```
 
 ---
 
