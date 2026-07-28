@@ -24,8 +24,6 @@ For every selected paper, the tracker produces:
 - a **fast-follower score / rank**
 - a one-line **share blurb**
 
----
-
 ## What this tracker is optimized for
 
 This is **not** a generic paper summarizer.
@@ -243,4 +241,12 @@ READER_LANGUAGE=en
 ```
 
 ---
+
+## License
+
+Trend Tracker is open-source software released under the [MIT License](LICENSE).
+
+## Feedback and contact
+
+Questions, corrections, and feature requests are welcome through [GitHub Issues](https://github.com/Park-Junjae/Trend_tracker/issues) or at [best916116@gmail.com](mailto:best916116@gmail.com).
 
